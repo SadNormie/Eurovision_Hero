@@ -1,4 +1,4 @@
-def finalists():
+def finalists(): #A function for making finalists
     grand_final = []
     p = 0
     print('''Hello, and welcome to Eurovision Hero :)
@@ -35,10 +35,7 @@ def finalists():
                 print(grand_final[x])
             p += 1 
     return grand_final
-
-
-
-def jury():
+def jury(): #A function for making the jury and the televote
     jury_loop = True
     the_jury = []
     the_televote = []
@@ -74,15 +71,11 @@ def jury():
     for x in range(len(the_jury)):
         print(the_jury[x])
     return the_jury, the_televote
-
-
-
-def brain():
+def brain(): #The function running Eurovision_Hero
     global participants
     participants = finalists()
     print('Do you want to make your own jury?\n\nyes\nno\n')
     the_jury, the_televote = jury()
-
 
 brain()
 
