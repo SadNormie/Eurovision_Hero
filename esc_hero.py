@@ -1,3 +1,6 @@
+import random
+import time
+
 def finalists(): #A function for making finalists
     grand_final = []
     p = 0
@@ -25,7 +28,7 @@ def finalists(): #A function for making finalists
             p -= 1
             
 
-        elif p > 25: 
+        elif p >= 26: 
             print("Sorry, but you can't add any more countries!") 
 
         else:
@@ -67,17 +70,64 @@ def jury(): #A function for making the jury and the televote
             print('invalid input, try again')
 
     the_televote = list(the_jury)
-    print('\nYour Jury')
-    for x in range(len(the_jury)):
-        print(the_jury[x])
+    random.shuffle(the_jury)
+    random.shuffle(the_televote)
     return the_jury, the_televote
+
+
 def brain(): #The function running Eurovision_Hero
     global participants
     participants = finalists()
     print('Do you want to make your own jury?\n\nyes\nno\n')
     the_jury, the_televote = jury()
+    for y in range(len(participants)):
+        odds = [63, 42, 19, 10, 8, 7, 6, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
+        points = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12]
+        odds_by_participant = [[participant, odds[index]] for index, participant in enumerate(participants)]
+        winners = []
+        value = 0 
+        for x in range(len(odds_by_participant)):
+            odds_by_participant[x].append(value)
+            value += odds_by_participant[x][1]
+            odds_by_participant[x].append(value)
+        jury_currently_voting = the_jury[y]
+
+        stopper = len(odds_by_participant)
+        if len(odds_by_participant) >= 11:
+            stopper = 11
+        while len(winners) < stopper - 1:
+            casting_vote = random.randrange(0, value)
+            for x in range(len(odds_by_participant)):
+                if casting_vote > odds_by_participant[x][2] and casting_vote < odds_by_participant[x][3] and odds_by_participant[x][0] not in winners and odds_by_participant[x][0] not in jury_currently_voting:
+                    winners.append(odds_by_participant[x][0])
+                
+
+        winners.reverse()
+        for p in range(len(winners)):
+            if p == 0:
+                time.sleep(0.25)
+                print(points[p], "point goes to", winners[p])
+            elif p == 9:
+                input("")
+                print(winners[p], "gets ", points[p], "points from ", jury_currently_voting + "!")
+            else:
+                time.sleep(0.25)
+                print(points[p], "points goes to", winners[p])
+        input("")
+
+            
+        
+            
 
 brain()
+
+
+    
+
+
+    
+
+
 
 
 
