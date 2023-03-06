@@ -7,7 +7,7 @@ def finalists(): #A function for making finalists
     print('''Hello, and welcome to Eurovision Hero :)
     please write your participating countries of desire in order of who should have the highest odds of winning.
     Should you wish to delete the last country you wrote, write "delete" 
-    When you are done, press 'enter' on your keyboard
+    When you are done, press "enter" on your keyboard
     ''') #Welcome message
 
     '''This loop asks the user to add their countries of choice to a list
@@ -39,6 +39,7 @@ def finalists(): #A function for making finalists
             p += 1 
     return grand_final
 def jury(): #A function for making the jury and the televote
+    
     jury_loop = True
     the_jury = []
     the_televote = []
@@ -49,6 +50,9 @@ def jury(): #A function for making the jury and the televote
             print("")
             jury_loop = False
         elif same_as_grand_final == 'yes':
+            print('''\nplease write your jury of desire.
+Should you wish to delete the last jury you wrote, write "delete" 
+When you are done, press "enter" on your keyboard and watch your grand final''')
             while True:
                 print('\n')
                 add_jury = input() 
@@ -81,6 +85,21 @@ def brain(): #The function running Eurovision_Hero
     participants = finalists()
     print('Do you want to make your own jury?\n\nyes\nno\n')
     the_jury, the_televote = jury()
+    odds = ["31.5%", "21%", "9.5%", "5%", "4%", "3.5%", "3%", "2.5%", "2%", "1.5%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "1%", "0.5%"]
+    print('''\nNow you are ready for the voting process.
+As you may have noticed, you haven't had the opportunity to add a televote.
+Don't worry, though! The program will automatically make a televote equal to the jury.
+As of Eurovision 2023, the program will also automatically add "Rest of the world" as a member of the televote.
+
+Press "enter" to continue''')
+    input("")
+    print("This program gives points based on an odds based system. The countries you wrote has the following chance of getting 12 points from the jury, with the assumption, that 26 participants are present:")
+    time.sleep(10)
+    for e in range(len(participants)):
+        print(participants[e], odds[e])
+        time.sleep(0.5)
+    print('''\nPress "enter" to continue''')
+    input("")
     random.shuffle(the_jury), random.shuffle(the_televote)
     for y in range(len(the_jury)):
         odds = [63+random.randrange(-61, 32), 
@@ -110,6 +129,7 @@ def brain(): #The function running Eurovision_Hero
                 2+random.randrange(0, 1), 
                 2+random.randrange(0, 1), 
                 1+random.randrange(0, 1)]
+        
         points = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12]
         odds_by_participant = [[participant, odds[index]] for index, participant in enumerate(participants)]
         winners = []
