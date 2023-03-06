@@ -261,7 +261,7 @@ Press "enter" to continue''')
                 print(points[p], "point goes to", winners[p])
             elif p == 9:
                 input("")
-                print(winners[p], "gets", points[p], "points from", televote_currently_voting + "!")
+                print(televote_currently_voting, "gives", points[p], "points to", winners[p] + "!")
             else:
                 time.sleep(0.25)
                 print(points[p], "points goes to", winners[p])
